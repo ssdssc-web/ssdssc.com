@@ -56,6 +56,8 @@
     m =
       ((c.exflowUrlmapping = {
         "https://orchid-themes-501884.framer.app/": "index.html",
+        "https://orchid-themes-501884.framer.app/popular": "/esper/popular",
+        "/popular": "/esper/popular",
         "https://framerusercontent.com/images/TWWqYxotlhDxaBp7dwhjEDKyHAE.png":
           "/esper/images/twwqyxotlhdxabp7dwhjedkyhae.png",
         "https://framerusercontent.com/images/B0gRIBR06CZgNOIdqqWzyNyz2Vc.png":

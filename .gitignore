@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # old resources
 old websites/
+
+.vercel

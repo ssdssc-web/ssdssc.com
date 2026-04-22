@@ -1,0 +1,16 @@
+{
+  "_note": "TEMPORARY: The / -> /esper redirect preserves SEO from the old Netlify ssdssc.com/ URL. Once Google Search Console shows ssdssc.com/esper is indexed and ranking, REMOVE the first redirect rule and deploy again so the SSDSSC homepage becomes visible at /.",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/esper",
+      "permanent": true
+    },
+    {
+      "source": "/esper/",
+      "destination": "/esper",
+      "permanent": true
+    }
+  ]
+}
+

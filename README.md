@@ -1,46 +1,46 @@
-# Astro Starter Kit: Basics
+<div align="center">
 
-```sh
-npm create astro@latest -- --template basics
-```
+# Science Society of D.S. Senanayake College
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Sri Lanka's leading school science society.**  
+We empower the next generation of innovators.
 
-## 🚀 Project Structure
+</div>
 
-Inside of your Astro project, you'll see the following folders and files:
+### 🚀 **Strategic Focus**
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- **Organize Innovation Awards** — like the prestigious ESPER Awards, celebrating young scientific minds and research.
+- **National Science Days** — bringing together students, schools, and experts from across the island for collaboration.
+- **Foster Scientific Research** — promoting a culture of curiosity, logic, and long-term scientific development.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+#### 🌐 **Platforms & Ecosystems**
 
-## 🧞 Commands
+- **ESPER Awards Platform** — a premium, high-performance web experience for innovation tracking and awards.
+- **Science Society Portal** — a clean digital identity for one of Sri Lanka's most prestigious school societies.
+- **Educational Resources** — sleek, modern platforms for scientific content, tutorials, and research sharing.
+- **Event Management Systems** — tailored booking and registration systems for school-level competitions and summits.
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### 👨‍💻 **Team**
 
-## 👀 Want to learn more?
+[@Sadaka-Wijerathna](https://github.com/Sadaka-Wijerathna)<br>
+[@Rashaad1268](https://github.com/Rashaad1268)<br>
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+### 🔗 **Connect With Us**
+
+<p align="center">
+  <a href="https://ssdssc.com"><img src="https://img.shields.io/badge/Web-ssdssc.com-000000?style=for-the-badge" /></a>
+  <a href="https://www.instagram.com/ss.dssc?igsh=MTY4aGkyc2doNGU1eA=="><img src="https://img.shields.io/badge/Instagram-@ss.dssc-E4405F?style=for-the-badge&logo=instagram" /></a>
+</p>
+
+---
+
+<div align="center">
+
+**Innovate. Inspire. Lead.**  
+_© SSDSSC — Science Society of D.S. Senanayake College_
+
+</div>

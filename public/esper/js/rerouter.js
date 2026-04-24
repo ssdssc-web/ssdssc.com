@@ -1,63 +1,66 @@
 (() => {
   let o = (e) => {
-      var t,
-        r,
-        a,
-        o,
-        s,
-        n = [],
-        i = [(r = 1732584193), (a = 4023233417), ~r, ~a, 3285377520],
-        l = [],
-        p = unescape(encodeURI(e)) + "?",
-        f = p.length;
-      for (l[(e = (--f / 4 + 2) | 15)] = 8 * f; ~f; )
-        l[f >> 2] |= p.charCodeAt(f) << (8 * ~f--);
-      for (t = f = 0; t < e; t += 16) {
-        for (
-          r = i;
-          f < 80;
-          r = [
-            r[4] +
-              (n[f] = f < 16 ? ~~l[t + f] : (2 * p) | (p < 0)) +
-              1518500249 +
-              [
-                (a & o) | (~a & s),
-                (p = 341275144 + (a ^ o ^ s)),
-                882459459 + ((a & o) | (a & s) | (o & s)),
-                p + 1535694389,
-              ][(f++ / 5) >> 2] +
-              (((p = r[0]) << 5) | (p >>> 27)),
-            p,
-            (a << 30) | (a >>> 2),
-            o,
-            s,
-          ]
-        )
-          ((p = n[f - 3] ^ n[f - 8] ^ n[f - 14] ^ n[f - 16]),
-            (a = r[1]),
-            (o = r[2]),
-            (s = r[3]));
-        for (f = 5; f; ) i[--f] += r[f];
-      }
-      for (p = ""; f < 40; )
-        p += ((i[f >> 3] >> (4 * (7 - f++))) & 15).toString(16);
-      return p;
-    },
+    var t,
+      r,
+      a,
+      o,
+      s,
+      n = [],
+      i = [(r = 1732584193), (a = 4023233417), ~r, ~a, 3285377520],
+      l = [],
+      p = unescape(encodeURI(e)) + "?",
+      f = p.length;
+    for (l[(e = (--f / 4 + 2) | 15)] = 8 * f; ~f;)
+      l[f >> 2] |= p.charCodeAt(f) << (8 * ~f--);
+    for (t = f = 0; t < e; t += 16) {
+      for (
+        r = i;
+        f < 80;
+        r = [
+          r[4] +
+          (n[f] = f < 16 ? ~~l[t + f] : (2 * p) | (p < 0)) +
+          1518500249 +
+          [
+            (a & o) | (~a & s),
+            (p = 341275144 + (a ^ o ^ s)),
+            882459459 + ((a & o) | (a & s) | (o & s)),
+            p + 1535694389,
+          ][(f++ / 5) >> 2] +
+          (((p = r[0]) << 5) | (p >>> 27)),
+          p,
+          (a << 30) | (a >>> 2),
+          o,
+          s,
+        ]
+      )
+        ((p = n[f - 3] ^ n[f - 8] ^ n[f - 14] ^ n[f - 16]),
+          (a = r[1]),
+          (o = r[2]),
+          (s = r[3]));
+      for (f = 5; f;) i[--f] += r[f];
+    }
+    for (p = ""; f < 40;)
+      p += ((i[f >> 3] >> (4 * (7 - f++))) & 15).toString(16);
+    return p;
+  },
     c =
       (Object.defineProperty(navigator, "connection", {
         get: () => ({
           saveData: !0,
           effectiveType: "2g",
-          addEventListener: () => {},
-          removeEventListener: () => {},
+          addEventListener: () => { },
+          removeEventListener: () => { },
         }),
       }),
-      "undefined" != typeof window ? window : self),
+        "undefined" != typeof window ? window : self),
     m =
       ((c.exflowUrlmapping = {
         "https://orchid-themes-501884.framer.app/": "index.html",
         "https://orchid-themes-501884.framer.app/popular": "/esper/popular",
         "/popular": "/esper/popular",
+        "/sci-union": "/esper/register",
+        "https://ssdssc.com/sci-union": "/esper/register",
+        "https://www.ssdssc.com/sci-union": "/esper/register",
         "https://framerusercontent.com/images/TWWqYxotlhDxaBp7dwhjEDKyHAE.png":
           "/esper/images/twwqyxotlhdxabp7dwhjedkyhae.png",
         "https://framerusercontent.com/images/B0gRIBR06CZgNOIdqqWzyNyz2Vc.png":
@@ -342,32 +345,33 @@
         "https://framerusercontent.com/assets/u8enVOaruZS1o3FWMEBitZ5GDU.mp4":
           "/esper/images/u8envoaruzs1o3fwmebitz5gdu.mp4",
       }),
-      (c.exflowSkipUrls = [
-        "https://events.framer.com/",
-        "https://api.framer.com/analytics",
-      ]),
-      (c.exflowUrlmapping = {
-        ...c.exflowUrlmapping,
-        ...Object.fromEntries(
-          Object.entries(c.exflowUrlmapping)
-            .map(([e, t]) => {
-              e = new URL(e, location.origin);
-              return (
-                e.origin !== location.origin && [
-                  e.href.replace(e.origin, location.origin),
-                  t,
-                ]
-              );
-            })
-            .filter((e) => e),
-        ),
-      }),
-      (
-        c.document?.baseURI ||
-        (c.location && c.location.href ? c.location.href : "")
-      ).replace(/^blob:/, ""));
+        (c.exflowSkipUrls = [
+          "https://events.framer.com/",
+          "https://api.framer.com/analytics",
+        ]),
+        (c.exflowUrlmapping = {
+          ...c.exflowUrlmapping,
+          ...Object.fromEntries(
+            Object.entries(c.exflowUrlmapping)
+              .map(([e, t]) => {
+                e = new URL(e, location.origin);
+                return (
+                  e.origin !== location.origin && [
+                    e.href.replace(e.origin, location.origin),
+                    t,
+                  ]
+                );
+              })
+              .filter((e) => e),
+          ),
+        }),
+        (
+          c.document?.baseURI ||
+          (c.location && c.location.href ? c.location.href : "")
+        ).replace(/^blob:/, ""));
   if (
     ((c.exflowRemap = (e, t) => {
+      if ("string" == typeof e && e.includes("/sci-union")) return "/esper/register";
       if ("string" == typeof e) {
         if ((e = new URL(e, m)).pathname.startsWith("/_framer/api/"))
           if (void 0 !== t)
@@ -393,7 +397,7 @@
       }
       return e;
     }),
-    "fetch" in c && "function" == typeof c.fetch)
+      "fetch" in c && "function" == typeof c.fetch)
   ) {
     let f = c.fetch;
     c.fetch = async (r, e) => {
@@ -402,9 +406,9 @@
         ("string" == typeof r
           ? (a = new URL(r, m))
           : r && r.href && (a = new URL(r.href, m)),
-        !c.exflowSkipUrls.some(
-          (e) => a.href.startsWith(e) || a.pathname.startsWith(e),
-        ))
+          !c.exflowSkipUrls.some(
+            (e) => a.href.startsWith(e) || a.pathname.startsWith(e),
+          ))
       ) {
         var o = c.exflowRemap(a.toString(), e?.body),
           s = a.searchParams.get("range");
@@ -538,23 +542,23 @@
                           c.exflowRemap(e.getAttribute("src")),
                         ),
                         e.hasAttribute("href") &&
-                          "use" !== e.tagName.toLowerCase() &&
-                          e.setAttribute(
-                            "href",
-                            c.exflowRemap(e.getAttribute("href")),
-                          ),
+                        "use" !== e.tagName.toLowerCase() &&
+                        e.setAttribute(
+                          "href",
+                          c.exflowRemap(e.getAttribute("href")),
+                        ),
                         e.hasAttribute("data-poster") &&
-                          e.setAttribute(
-                            "data-poster",
-                            c.exflowRemap(e.getAttribute("data-poster")),
-                          ),
+                        e.setAttribute(
+                          "data-poster",
+                          c.exflowRemap(e.getAttribute("data-poster")),
+                        ),
                         e.hasAttribute("data") &&
-                          e.setAttribute(
-                            "data",
-                            c.exflowRemap(e.getAttribute("data")),
-                          ),
+                        e.setAttribute(
+                          "data",
+                          c.exflowRemap(e.getAttribute("data")),
+                        ),
                         e.hasAttribute("srcset") &&
-                          ((t = e.getAttribute("srcset")),
+                        ((t = e.getAttribute("srcset")),
                           e.setAttribute("srcset", a(t))));
                     }),
                   e.body.innerHTML
@@ -572,16 +576,16 @@
     var r;
     return (
       "string" != typeof e ||
-        "string" != typeof t ||
-        "use" === this.tagName.toLowerCase() ||
-        ("src" !== (r = e.toLowerCase()) &&
-          "href" !== r &&
-          "data-poster" !== r &&
-          "data" !== r &&
-          "srcset" !== r) ||
-        (t = "srcset" === r ? a(t) : c.exflowRemap(t)),
+      "string" != typeof t ||
+      "use" === this.tagName.toLowerCase() ||
+      ("src" !== (r = e.toLowerCase()) &&
+        "href" !== r &&
+        "data-poster" !== r &&
+        "data" !== r &&
+        "srcset" !== r) ||
+      (t = "srcset" === r ? a(t) : c.exflowRemap(t)),
       s.call(this, e, t)
     );
   }),
-    c?.navigator?.sendBeacon && (c.navigator.sendBeacon = () => {}));
+    c?.navigator?.sendBeacon && (c.navigator.sendBeacon = () => { }));
 })();

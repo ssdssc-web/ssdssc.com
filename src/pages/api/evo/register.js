@@ -310,7 +310,7 @@ export const POST = async ({ request }) => {
       const { error: emailErr } = await resend.emails.send({
         from:    'Evolvion\'26 <evolvion@ssdssc.com>',
         to:      [data.emailAddress],
-        subject: `⚡ THE SUMMONS — Your Access Codes | ${data.schoolName}`,
+        subject: `THE SUMMONS — Your Access Codes | ${data.schoolName}`,
         html,
       });
 

@@ -1886,21 +1886,31 @@
 								}
 
 								var observer = new MutationObserver(function (mutations) {
-									if (document.querySelector('.framer-yys7yq') && document.querySelector('.framer-nx1ytg')) {
+									// Fire as soon as the email field OR the submit button appears
+									if (document.querySelector('.framer-yys7yq') || document.querySelector('.framer-nx1ytg')) {
 										observer.disconnect();
 										setTimeout(buildForm, 120);
 									}
 								});
 								observer.observe(document.body, { childList: true, subtree: true });
 
+								// DOMContentLoaded fallback (500 ms)
 								document.addEventListener('DOMContentLoaded', function () {
 									setTimeout(function () {
-										if (document.querySelector('.framer-yys7yq')) {
+										if (!document.getElementById('evo-form-container')) {
 											observer.disconnect();
 											buildForm();
 										}
 									}, 500);
 								});
+
+								// Hard fallback — Framer sometimes hydrates after DOMContentLoaded
+								setTimeout(function () {
+									if (!document.getElementById('evo-form-container')) {
+										observer.disconnect();
+										buildForm();
+									}
+								}, 1500);
 
 							})();
 						</script>

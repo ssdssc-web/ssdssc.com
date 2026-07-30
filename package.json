@@ -15,6 +15,7 @@
     "@astrojs/vercel": "^10.0.8",
     "@supabase/supabase-js": "^2.110.0",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^6.1.8"
+    "astro": "^6.1.8",
+    "resend": "^6.18.1"
   }
 }

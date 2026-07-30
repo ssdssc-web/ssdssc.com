@@ -70,7 +70,7 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
       <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#111;">${m.name}${m.isCaptain ? ' <span style="font-size:11px;color:#6366f1;font-weight:600;">(Captain)</span>' : ''}</td>
       <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#555;">${SUBJECT_LABEL[m.subject]}</td>
       <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;">
-        <span style="font-family:monospace;font-size:15px;font-weight:700;letter-spacing:3px;color:#111;background:#f5f5f5;padding:5px 12px;border-radius:5px;display:inline-block;">${m.accessCode}</span>
+        <span style="font-family:monospace;font-size:15px;font-weight:700;letter-spacing:3px;color:#111;background:#f5f5f5;padding:5px 12px;border-radius:5px;display:inline-block;white-space:nowrap;">${m.accessCode}</span>
       </td>
     </tr>`).join('');
 
@@ -89,7 +89,7 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
 
           <!-- Header -->
           <tr>
-            <td style="background:#111;padding:28px 40px;text-align:center;">
+            <td style="background:#111;padding:28px 40px;text-align:center;border-bottom:3px solid #60a5fa;">
               <p style="margin:0;font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase;">Evolvion '26 &nbsp;·&nbsp; Phase 01</p>
               <h1 style="margin:8px 0 0;font-size:22px;font-weight:700;letter-spacing:4px;color:#ffffff;">THE SUMMONS</h1>
             </td>

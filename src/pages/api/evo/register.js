@@ -134,14 +134,33 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
 
 // ── Main handler ─────────────────────────────────────────────────────────────
 export const POST = async ({ request }) => {
-  const supabaseUrl  = import.meta.env.SUPABASE_URL  || process.env.SUPABASE_URL;
-  const supabaseKey  = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const resendKey    = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
+  const supabaseUrl = import.meta.env.SUPABASE_URL
+    || process.env.SUPABASE_URL
+    || 'https://dzzblbrmdaryttwplfrb.supabase.co'; // fallback — URL is not secret
+
+  const supabaseKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY
+    || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  const resendKey = import.meta.env.RESEND_API_KEY
+    || process.env.RESEND_API_KEY;
+
+  // Diagnose missing env vars
+  console.log('[register] env check:', {
+    hasUrl: !!supabaseUrl,
+    hasKey: !!supabaseKey,
+    hasResend: !!resendKey,
+  });
+
+  if (!supabaseKey) {
+    console.error('[register] SUPABASE_SERVICE_ROLE_KEY is not set in Vercel env vars');
+    return json500('Server misconfiguration: database key missing. Contact admin.');
+  }
 
   const supabase = createClient(supabaseUrl, supabaseKey);
   const resend   = resendKey && resendKey !== 're_YOUR_API_KEY_HERE'
     ? new Resend(resendKey)
     : null;
+
 
   try {
     const data = await request.json();

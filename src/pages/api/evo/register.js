@@ -151,19 +151,21 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
 
 // ── Main handler ─────────────────────────────────────────────────────────────
 export const POST = async ({ request }) => {
-  const supabaseUrl = import.meta.env.SUPABASE_URL
-    || process.env.SUPABASE_URL
-    || 'https://dzzblbrmdaryttwplfrb.supabase.co'; // fallback — URL is not secret
+  // Use process.env (runtime) NOT import.meta.env (build-time).
+  // Astro/Vite bakes import.meta.env at build time — if the var isn't set
+  // in Vercel at build time, it becomes the string "undefined" (truthy!),
+  // which bypasses the || fallback and crashes createClient.
+  const rawUrl = process.env.SUPABASE_URL;
+  const supabaseUrl = (rawUrl && rawUrl.startsWith('http'))
+    ? rawUrl
+    : 'https://dzzblbrmdaryttwplfrb.supabase.co'; // fallback — URL is not secret
 
-  const supabaseKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY
-    || process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  const resendKey = import.meta.env.RESEND_API_KEY
-    || process.env.RESEND_API_KEY;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const resendKey   = process.env.RESEND_API_KEY;
 
   // Diagnose missing env vars
   console.log('[register] env check:', {
-    hasUrl: !!supabaseUrl,
+    supabaseUrl,
     hasKey: !!supabaseKey,
     hasResend: !!resendKey,
   });

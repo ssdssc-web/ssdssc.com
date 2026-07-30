@@ -151,15 +151,24 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
 
 // ── Main handler ─────────────────────────────────────────────────────────────
 export const POST = async ({ request }) => {
-  const supabaseUrl = import.meta.env.SUPABASE_URL
-    || process.env.SUPABASE_URL
-    || 'https://dzzblbrmdaryttwplfrb.supabase.co'; // fallback — URL is not secret
+  let rawUrl = import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL;
+  if (typeof rawUrl === 'string') {
+    rawUrl = rawUrl.replace(/["']/g, '').trim(); // Remove quotes or spaces
+  }
+  
+  const supabaseUrl = (rawUrl && rawUrl !== 'undefined' && rawUrl !== 'null' && rawUrl.startsWith('http'))
+    ? rawUrl 
+    : 'https://dzzblbrmdaryttwplfrb.supabase.co'; // Force fallback if invalid
 
-  const supabaseKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY
-    || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  let supabaseKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (typeof supabaseKey === 'string') {
+    supabaseKey = supabaseKey.replace(/["']/g, '').trim();
+  }
 
-  const resendKey = import.meta.env.RESEND_API_KEY
-    || process.env.RESEND_API_KEY;
+  let resendKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
+  if (typeof resendKey === 'string') {
+    resendKey = resendKey.replace(/["']/g, '').trim();
+  }
 
   // Diagnose missing env vars
   console.log('[register] env check:', {

@@ -1438,7 +1438,7 @@
 
 							/* ── Form message (esper-style inline below button) ── */
 							#evo-form-message {
-								position: fixed;
+								position: absolute;
 								display: none;
 								margin-top: 12px;
 								text-align: center;
@@ -1517,8 +1517,8 @@
 									if (btnEl && wideEl) {
 										var rb = btnEl.getBoundingClientRect();
 										var rw = wideEl.getBoundingClientRect();
-										m.style.top = (rb.bottom + 10) + 'px';
-										m.style.left = rw.left + 'px';
+										m.style.top = (rb.bottom + window.scrollY + 10) + 'px';
+										m.style.left = (rw.left + window.scrollX) + 'px';
 										m.style.width = rw.width + 'px';
 									}
 									m.style.display = 'block';
@@ -1546,6 +1546,11 @@
 									formContainer.id = 'evo-form-container';
 									formContainer.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:0;overflow:visible;pointer-events:none;z-index:9998;';
 									document.body.appendChild(formContainer);
+
+									/* Move message box into formContainer so position:absolute uses the same
+									   coordinate space as getBoundingClientRect() + scrollY */
+									var msgEl = document.getElementById('evo-form-message');
+									if (msgEl) formContainer.appendChild(msgEl);
 
 									function makeInput(placeholder, type) {
 										var el = document.createElement('input');

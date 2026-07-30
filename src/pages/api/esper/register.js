@@ -4,9 +4,32 @@ import { createClient } from '@supabase/supabase-js';
 export const prerender = false;
 
 export const POST = async ({ request }) => {
-  // Initialize Supabase client at request time so env vars are available
-  const supabaseUrl = import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL;
-  const supabaseKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Use process.env (runtime) NOT import.meta.env (build-time).
+  // Astro/Vite bakes import.meta.env at build time — if the var isn't set
+  // in Vercel at build time it becomes the string "undefined" (truthy!),
+  // which bypasses the || fallback, crashes createClient synchronously, and
+  // causes Astro to emit an empty 500 body (hence: Unexpected end of JSON input).
+  const rawUrl = process.env.SUPABASE_URL;
+  const supabaseUrl = (rawUrl && rawUrl.startsWith('http'))
+    ? rawUrl
+    : 'https://dzzblbrmdaryttwplfrb.supabase.co'; // fallback — URL is not secret
+
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  // Diagnose missing env vars
+  console.log('[esper/register] env check:', {
+    supabaseUrl,
+    hasKey: !!supabaseKey,
+  });
+
+  if (!supabaseKey) {
+    console.error('[esper/register] SUPABASE_SERVICE_ROLE_KEY is not set in Vercel env vars');
+    return new Response(
+      JSON.stringify({ error: 'Server misconfiguration: database key missing. Contact admin.' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   const supabase = createClient(supabaseUrl, supabaseKey);
   try {
     const data = await request.json();

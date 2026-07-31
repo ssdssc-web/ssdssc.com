@@ -155,6 +155,10 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
                 <li>Wait — the quiz will go live automatically</li>
               </ol>
 
+              <p class="email-note" style="margin:16px 0 0;font-size:13px;color:#333;line-height:1.5;">
+                <strong>Note:</strong> Online rounds will be held on <strong>August 28th</strong>.
+              </p>
+
               <p class="email-note" style="margin:24px 0 0;font-size:12px;color:#aaa;line-height:1.7;">
                 Each code is unique to one member. Please do not share it.<br>
                 Keep this email — you will need your code on the day of the event.

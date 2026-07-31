@@ -1,6 +1,28 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "summons.ssdssc.com"
+        }
+      ],
+      "destination": "/summons",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?ssdssc\\.com"
+        }
+      ],
+      "destination": "/esper",
+      "permanent": true
+    },
+    {
       "source": "/esper/",
       "destination": "/esper",
       "permanent": true

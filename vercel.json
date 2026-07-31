@@ -5,18 +5,6 @@
       "destination": "/esper",
       "permanent": true
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "summons.ssdssc.com"
-        }
-      ],
-      "destination": "/summons/"
-    }
   ]
 }
 

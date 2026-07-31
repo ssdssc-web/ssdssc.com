@@ -1,7 +1,11 @@
 ---
 // Temporary SSDSSC Homepage — Black & Gold
 import Analytics from '@vercel/analytics/astro'
-export const prerender = true;
+
+const host = Astro.url.hostname;
+if (host.includes('summons')) {
+  return Astro.redirect('/summons');
+}
 ---
 
 <!doctype html>

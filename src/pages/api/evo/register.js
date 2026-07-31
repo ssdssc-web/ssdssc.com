@@ -66,11 +66,11 @@ function formatPhone(phone) {
 // ── Email HTML builder ───────────────────────────────────────────────────────
 function buildEmailHtml({ schoolName, members, quizUrl }) {
   const rows = members.map(m => `
-    <tr>
+    <tr class="codes-row">
       <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#111;">${m.name}${m.isCaptain ? ' <span style="font-size:11px;color:#6366f1;font-weight:600;">(Captain)</span>' : ''}</td>
-      <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#555;">${SUBJECT_LABEL[m.subject]}</td>
+      <td class="subject-col" style="padding:12px 16px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#555;">${SUBJECT_LABEL[m.subject]}</td>
       <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;">
-        <span style="font-family:monospace;font-size:15px;font-weight:700;letter-spacing:3px;color:#111;background:#f5f5f5;padding:5px 12px;border-radius:5px;display:inline-block;white-space:nowrap;">${m.accessCode}</span>
+        <span class="code-badge" style="font-family:monospace;font-size:15px;font-weight:700;letter-spacing:3px;color:#111;background:#f5f5f5;padding:5px 12px;border-radius:5px;display:inline-block;white-space:nowrap;">${m.accessCode}</span>
       </td>
     </tr>`).join('');
 
@@ -79,18 +79,47 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
   <title>THE SUMMONS — Access Codes</title>
+  <style>
+    /* Force light mode — override any dark-mode auto-inversion */
+    :root { color-scheme: light; }
+    @media (prefers-color-scheme: dark) {
+      body, .email-body         { background: #f6f6f6 !important; color: #111111 !important; }
+      .email-card               { background: #ffffff !important; }
+      .email-header             { background: #111111 !important; }
+      .email-header p           { color: #888888 !important; }
+      .email-header h1          { color: #ffffff !important; }
+      .email-label              { color: #888888 !important; }
+      .email-school             { color: #111111 !important; }
+      .email-section-label      { color: #888888 !important; }
+      .codes-table              { border-color: #f0f0f0 !important; }
+      .codes-thead td,
+      .codes-thead th           { background: #fafafa !important; color: #888888 !important; border-color: #f0f0f0 !important; }
+      .codes-row td             { color: #111111 !important; border-color: #f0f0f0 !important; }
+      .codes-row td.subject-col { color: #555555 !important; }
+      .code-badge               { background: #f5f5f5 !important; color: #111111 !important; }
+      .email-divider            { border-color: #f0f0f0 !important; }
+      .how-title                { color: #111111 !important; }
+      .how-list                 { color: #555555 !important; }
+      .how-link                 { color: #6366f1 !important; }
+      .email-note               { color: #aaaaaa !important; }
+      .email-footer td          { border-color: #f0f0f0 !important; }
+      .email-footer p           { color: #bbbbbb !important; }
+    }
+  </style>
 </head>
-<body style="margin:0;padding:0;background:#f6f6f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+<body class="email-body" style="margin:0;padding:0;background:#f6f6f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color-scheme:light;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f6f6f6;padding:40px 0;">
     <tr>
       <td align="center">
-        <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+        <table class="email-card" width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
 
           <!-- Header -->
           <tr>
-            <td style="background:#111;padding:28px 40px;text-align:center;border-bottom:3px solid #60a5fa;">
-              <p style="margin:0;font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase;">Evolvion '26 &nbsp;·&nbsp; Phase 01</p>
+            <td class="email-header" style="background:#111;padding:28px 40px;text-align:center;border-bottom:3px solid #60a5fa;">
+              <p class="email-label" style="margin:0;font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase;">Evolvion '26 &nbsp;·&nbsp; Phase 01</p>
               <h1 style="margin:8px 0 0;font-size:22px;font-weight:700;letter-spacing:4px;color:#ffffff;">THE SUMMONS</h1>
             </td>
           </tr>
@@ -98,14 +127,14 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
           <!-- Body -->
           <tr>
             <td style="padding:36px 40px 28px;">
-              <p style="margin:0 0 4px;font-size:13px;color:#888;">Registration confirmed for</p>
-              <h2 style="margin:0 0 28px;font-size:20px;font-weight:600;color:#111;">${schoolName}</h2>
+              <p class="email-label" style="margin:0 0 4px;font-size:13px;color:#888;">Registration confirmed for</p>
+              <h2 class="email-school" style="margin:0 0 28px;font-size:20px;font-weight:600;color:#111;">${schoolName}</h2>
 
-              <p style="margin:0 0 12px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#888;">Access Codes</p>
+              <p class="email-section-label" style="margin:0 0 12px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#888;">Access Codes</p>
 
               <!-- Codes table -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #f0f0f0;border-radius:6px;overflow:hidden;">
-                <thead>
+              <table class="codes-table" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #f0f0f0;border-radius:6px;overflow:hidden;">
+                <thead class="codes-thead">
                   <tr style="background:#fafafa;">
                     <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#888;border-bottom:1px solid #f0f0f0;">Member</th>
                     <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#888;border-bottom:1px solid #f0f0f0;">Subject</th>
@@ -116,17 +145,17 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
               </table>
 
               <!-- Divider -->
-              <div style="border-top:1px solid #f0f0f0;margin:28px 0;"></div>
+              <div class="email-divider" style="border-top:1px solid #f0f0f0;margin:28px 0;"></div>
 
               <!-- How to enter -->
-              <p style="margin:0 0 10px;font-size:13px;font-weight:600;color:#111;">How to enter on quiz day:</p>
-              <ol style="margin:0;padding-left:18px;color:#555;font-size:13px;line-height:2;">
-                <li>Visit <a href="${quizUrl}" style="color:#6366f1;text-decoration:none;font-weight:500;">${quizUrl}</a></li>
+              <p class="how-title" style="margin:0 0 10px;font-size:13px;font-weight:600;color:#111;">How to enter on quiz day:</p>
+              <ol class="how-list" style="margin:0;padding-left:18px;color:#555;font-size:13px;line-height:2;">
+                <li>Visit <a class="how-link" href="${quizUrl}" style="color:#6366f1;text-decoration:none;font-weight:500;">${quizUrl}</a></li>
                 <li>Enter your personal access code</li>
                 <li>Wait — the quiz will go live automatically</li>
               </ol>
 
-              <p style="margin:24px 0 0;font-size:12px;color:#aaa;line-height:1.7;">
+              <p class="email-note" style="margin:24px 0 0;font-size:12px;color:#aaa;line-height:1.7;">
                 Each code is unique to one member. Please do not share it.<br>
                 Keep this email — you will need your code on the day of the event.
               </p>
@@ -134,9 +163,9 @@ function buildEmailHtml({ schoolName, members, quizUrl }) {
           </tr>
 
           <!-- Footer -->
-          <tr>
+          <tr class="email-footer">
             <td style="padding:20px 40px;border-top:1px solid #f0f0f0;text-align:center;">
-              <p style="margin:0;font-size:12px;color:#bbb;">D.S. Senanayake College Science Society &nbsp;·&nbsp; Evolvion '26</p>
+              <p class="email-footer" style="margin:0;font-size:12px;color:#bbb;">D.S. Senanayake College Science Society &nbsp;·&nbsp; Evolvion '26</p>
             </td>
           </tr>
 

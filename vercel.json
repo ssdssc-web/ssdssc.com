@@ -1,17 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "(www\\.)?ssdssc\\.com"
-        }
-      ],
-      "destination": "/esper",
-      "permanent": true
-    },
-    {
       "source": "/esper/",
       "destination": "/esper",
       "permanent": true

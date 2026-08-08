@@ -1129,7 +1129,7 @@ if (typeof window !== "undefined") {
 
       /* ── Form message (esper-style inline below button) ── */
       #evo-form-message {
-        position: fixed;
+        position: absolute;
         display: none;
         margin-top: 12px;
         text-align: center;
@@ -1190,29 +1190,9 @@ if (typeof window !== "undefined") {
         });
       }
 
-      function repositionMessage() {
-        var m = document.getElementById('evo-form-message');
-        if (!m || m.style.display === 'none') return;
-        var btnEl = document.querySelector('.framer-nx1ytg');
-        var wideEl = document.querySelector('.framer-1ex2qu8') || btnEl;
-        if (btnEl && wideEl) {
-          var rb = btnEl.getBoundingClientRect();
-          var rw = wideEl.getBoundingClientRect();
-          m.style.top   = (rb.bottom + 10) + 'px';
-          m.style.left  = rw.left + 'px';
-          m.style.width = rw.width + 'px';
-        }
-      }
-
       function hideMessage() {
         var m = document.getElementById('evo-form-message');
-        if (m) {
-          m.style.display = 'none';
-          if (m._toastScrollHandler) {
-            window.removeEventListener('scroll', m._toastScrollHandler);
-            m._toastScrollHandler = null;
-          }
-        }
+        if (m) m.style.display = 'none';
         restoreHelpline();
       }
 
@@ -1221,14 +1201,16 @@ if (typeof window !== "undefined") {
         m.textContent = msg;
         m.className = 'evo-msg-' + type;
         /* Position just below the Submit button, width matches the form inputs */
-        repositionMessage();
-        m.style.display = 'block';
-        /* Re-position on every scroll so it tracks the button while page scrolls */
-        if (m._toastScrollHandler) {
-          window.removeEventListener('scroll', m._toastScrollHandler);
+        var btnEl = document.querySelector('.framer-nx1ytg');
+        var wideEl = document.querySelector('.framer-1ex2qu8') || btnEl;
+        if (btnEl && wideEl) {
+          var rb = btnEl.getBoundingClientRect();
+          var rw = wideEl.getBoundingClientRect();
+          m.style.top   = (rb.bottom + window.scrollY + 10) + 'px';
+          m.style.left  = (rw.left   + window.scrollX) + 'px';
+          m.style.width = rw.width + 'px';
         }
-        m._toastScrollHandler = repositionMessage;
-        window.addEventListener('scroll', m._toastScrollHandler, { passive: true });
+        m.style.display = 'block';
         /* Push helpline down so it isn't covered */
         var shift = m.offsetHeight + 16;
         pushHelplineDown(shift);
@@ -1593,31 +1575,21 @@ if (typeof window !== "undefined") {
       }
 
       var observer = new MutationObserver(function(mutations) {
-        // Fire as soon as the email field OR the submit button appears
-        if (document.querySelector('.framer-yys7yq') || document.querySelector('.framer-nx1ytg')) {
+        if (document.querySelector('.framer-yys7yq') && document.querySelector('.framer-nx1ytg')) {
           observer.disconnect();
           setTimeout(buildForm, 120);
         }
       });
       observer.observe(document.body, { childList: true, subtree: true });
 
-      // DOMContentLoaded fallback (500 ms)
       document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
-          if (!document.getElementById('evo-form-container')) {
+          if (document.querySelector('.framer-yys7yq')) {
             observer.disconnect();
             buildForm();
           }
         }, 500);
       });
-
-      // Hard fallback — Framer sometimes hydrates after DOMContentLoaded
-      setTimeout(function() {
-        if (!document.getElementById('evo-form-container')) {
-          observer.disconnect();
-          buildForm();
-        }
-      }, 1500);
 
     })();
     </script>

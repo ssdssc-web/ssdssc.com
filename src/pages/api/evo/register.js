@@ -260,6 +260,54 @@ export const POST = async ({ request }) => {
       return json400('Each member must have a different subject.');
     }
 
+    // ── 2b. Duplicate registration checks ───────────────────────────────────
+    const presidentPhone = formatPhone(data.presidentContact);
+    const captainPhone   = formatPhone(data.captainContact);
+
+    // Check: same email already registered
+    const { data: emailDupe } = await supabase
+      .from('evo_registrations')
+      .select('id')
+      .eq('email', data.emailAddress)
+      .maybeSingle();
+    if (emailDupe) {
+      return json400('This email address has already been used to register. Each school may only register once. If you believe this is an error, please contact us.');
+    }
+
+    // Check: same school name already registered (case-insensitive)
+    const { data: schoolDupe } = await supabase
+      .from('evo_registrations')
+      .select('id')
+      .ilike('school_name', data.schoolName.trim())
+      .maybeSingle();
+    if (schoolDupe) {
+      return json400('A registration for this school name already exists. Each school may only register once. If you believe this is an error, please contact us.');
+    }
+
+    // Check: president contact number already registered
+    if (presidentPhone) {
+      const { data: presidentDupe } = await supabase
+        .from('evo_registrations')
+        .select('id')
+        .eq('president_contact', presidentPhone)
+        .maybeSingle();
+      if (presidentDupe) {
+        return json400('This president contact number has already been used in a registration. Please contact us if you think this is a mistake.');
+      }
+    }
+
+    // Check: captain contact number already registered
+    if (captainPhone) {
+      const { data: captainDupe } = await supabase
+        .from('evo_registrations')
+        .select('id')
+        .eq('captain_contact', captainPhone)
+        .maybeSingle();
+      if (captainDupe) {
+        return json400('This captain contact number has already been used in a registration. Please contact us if you think this is a mistake.');
+      }
+    }
+
     // ── 3. Save to evo_registrations (the marketing DB table) ────────────────
     const { error: evoErr } = await supabase.from('evo_registrations').insert([{
       school_name:       data.schoolName,

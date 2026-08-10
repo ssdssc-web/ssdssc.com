@@ -169,37 +169,19 @@ const contactNumber = '070 767 0676';
       }
 
       .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.8rem;
-        text-decoration: none;
-      }
-
-      .brand img {
         width: 42px;
         height: 48px;
-        object-fit: contain;
-      }
-
-      .brand-copy {
         display: grid;
-        gap: 0.15rem;
+        place-items: center;
+        align-items: center;
+        color: var(--green);
       }
 
-      .brand-copy strong {
-        color: var(--white);
-        font-family: "Oxanium", sans-serif;
-        font-size: 0.8rem;
-        line-height: 1;
-        letter-spacing: 0.16em;
-      }
-
-      .brand-copy span {
-        color: var(--muted);
-        font-size: 0.58rem;
-        line-height: 1.2;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+      .brand-bolt {
+        width: 20px;
+        height: 42px;
+        overflow: visible;
+        filter: drop-shadow(0 0 10px rgba(20, 239, 19, 0.5));
       }
 
       .nav-links {
@@ -1106,10 +1088,6 @@ const contactNumber = '070 767 0676';
           height: 70px;
         }
 
-        .brand-copy span {
-          display: none;
-        }
-
         .nav-cta {
           min-height: 42px;
           padding-inline: 0.9rem;
@@ -1266,13 +1244,11 @@ const contactNumber = '070 767 0676';
 
     <header class="site-header" data-header>
       <nav class="nav" aria-label="Main navigation">
-        <a class="brand" href="/" aria-label="SSDSSC home">
-          <img src="/ssdssc/logo.png" alt="" width="42" height="48" />
-          <span class="brand-copy">
-            <strong>SSDS</strong>
-            <span>D. S. Senanayake College</span>
-          </span>
-        </a>
+        <div class="brand" role="img" aria-label="IgniteRC lightning mark">
+          <svg class="brand-bolt" viewBox="0 0 42 100" aria-hidden="true">
+            <path fill="currentColor" d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path>
+          </svg>
+        </div>
 
         <div class="nav-links">
           <a href="#showdown">The showdown</a>

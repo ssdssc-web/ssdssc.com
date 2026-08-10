@@ -1,0 +1,1565 @@
+---
+import Analytics from '@vercel/analytics/astro';
+
+export const prerender = true;
+
+const eventDate = '11 July 2026';
+const contactNumber = '070 767 0676';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#020908" />
+    <meta
+      name="description"
+      content="IgniteRC is the ultimate build-your-own inter-school RC car showdown by the Science Society of D. S. Senanayake College. Race day: 11 July 2026."
+    />
+    <link rel="canonical" href="https://ssdssc.com/igniterc" />
+
+    <meta property="og:title" content="IgniteRC 2026 | Design. Build. Race." />
+    <meta
+      property="og:description"
+      content="Schools across Sri Lanka's Western Province. One build-your-own RC showdown."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ssdssc.com/igniterc" />
+    <meta
+      property="og:image"
+      content="https://ssdssc.com/igniterc/igniterc-hero.webp"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="IgniteRC 2026" />
+    <meta
+      name="twitter:description"
+      content="The ultimate build-your-own RC showdown by SSDS."
+    />
+    <meta
+      name="twitter:image"
+      content="https://ssdssc.com/igniterc/igniterc-hero.webp"
+    />
+
+    <title>IgniteRC 2026 | SSDS</title>
+
+    <link rel="icon" type="image/x-icon" href="/ssdssc/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/ssdssc/favicon-32x32.png"
+    />
+    <link rel="apple-touch-icon" href="/ssdssc/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&family=Oxanium:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style is:global>
+      :root {
+        --black: #020908;
+        --ink: #08130d;
+        --surface: #0a1612;
+        --surface-bright: #0e2018;
+        --emerald: #015133;
+        --green: #14ef13;
+        --green-mid: #28b249;
+        --lime: #b9cc2f;
+        --white: #f2f3f2;
+        --steel: #9caba4;
+        --muted: #6f7e77;
+        --gold: #d5b04c;
+        --page-pad: clamp(1.25rem, 4.2vw, 5.5rem);
+        --content: 1240px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background: var(--black);
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          radial-gradient(circle at 76% 18%, rgba(20, 239, 19, 0.09), transparent 25rem),
+          var(--black);
+        color: var(--white);
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        pointer-events: none;
+        content: "";
+        opacity: 0.055;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      ::selection {
+        background: var(--green);
+        color: var(--black);
+      }
+
+      .skip-link {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 200;
+        padding: 0.75rem 1rem;
+        background: var(--green);
+        color: var(--black);
+        font-weight: 700;
+        text-decoration: none;
+        transform: translateY(-180%);
+        transition: transform 160ms ease;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 50;
+        border-bottom: 1px solid transparent;
+        transition:
+          background 240ms ease,
+          border-color 240ms ease,
+          backdrop-filter 240ms ease;
+      }
+
+      .site-header.is-scrolled {
+        border-color: rgba(242, 243, 242, 0.09);
+        background: rgba(2, 9, 8, 0.82);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav {
+        width: min(100%, calc(var(--content) + var(--page-pad) * 2));
+        height: 80px;
+        margin: 0 auto;
+        padding: 0 var(--page-pad);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 48px;
+        object-fit: contain;
+      }
+
+      .brand-copy {
+        display: grid;
+        gap: 0.15rem;
+      }
+
+      .brand-copy strong {
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.8rem;
+        line-height: 1;
+        letter-spacing: 0.16em;
+      }
+
+      .brand-copy span {
+        color: var(--muted);
+        font-size: 0.58rem;
+        line-height: 1.2;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: clamp(1.1rem, 2.5vw, 2.5rem);
+      }
+
+      .nav-links a:not(.nav-cta) {
+        color: var(--steel);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 160ms ease;
+      }
+
+      .nav-links a:not(.nav-cta):hover,
+      .nav-links a:not(.nav-cta):focus-visible {
+        color: var(--green);
+      }
+
+      .nav-cta,
+      .button {
+        position: relative;
+        isolation: isolate;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.65rem;
+        min-height: 48px;
+        padding: 0.8rem 1.25rem;
+        overflow: hidden;
+        border: 1px solid var(--green);
+        color: var(--black);
+        background: var(--green);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          background 180ms ease;
+      }
+
+      .nav-cta::before,
+      .button::before {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.7), transparent 65%);
+        transform: translateX(-130%);
+        transition: transform 420ms ease;
+      }
+
+      .nav-cta:hover,
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 32px rgba(20, 239, 19, 0.22);
+      }
+
+      .nav-cta:hover::before,
+      .button:hover::before {
+        transform: translateX(130%);
+      }
+
+      .button--ghost {
+        border-color: rgba(242, 243, 242, 0.3);
+        color: var(--white);
+        background: rgba(2, 9, 8, 0.25);
+        backdrop-filter: blur(8px);
+      }
+
+      .button svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      main {
+        display: block;
+      }
+
+      .hero {
+        --pointer-x: 72%;
+        --pointer-y: 38%;
+        position: relative;
+        min-height: min(940px, 100svh);
+        display: flex;
+        align-items: flex-end;
+        overflow: hidden;
+        isolation: isolate;
+        background: var(--black);
+      }
+
+      .hero::before {
+        position: absolute;
+        inset: 0;
+        z-index: -4;
+        content: "";
+        background-image: url("/igniterc/igniterc-hero.webp");
+        background-position: 64% center;
+        background-size: cover;
+        transform: scale(1.025);
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        content: "";
+        background:
+          radial-gradient(circle 25rem at var(--pointer-x) var(--pointer-y), rgba(20, 239, 19, 0.12), transparent 70%),
+          linear-gradient(90deg, rgba(2, 9, 8, 0.98) 0%, rgba(2, 9, 8, 0.8) 34%, rgba(2, 9, 8, 0.1) 70%),
+          linear-gradient(0deg, var(--black) 0%, transparent 34%, rgba(2, 9, 8, 0.2) 100%);
+      }
+
+      .hero-grid {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        opacity: 0.2;
+        background-image:
+          linear-gradient(rgba(242, 243, 242, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(242, 243, 242, 0.045) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(to right, black, transparent 72%);
+      }
+
+      .hero-speed-lines {
+        position: absolute;
+        top: 53%;
+        left: -10%;
+        z-index: -1;
+        width: 78%;
+        height: 9rem;
+        opacity: 0.56;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent 0 12px,
+          rgba(20, 239, 19, 0.48) 13px 15px,
+          transparent 16px 24px
+        );
+        filter: blur(1px);
+        transform: perspective(500px) rotateX(58deg) rotateZ(-2deg) skewX(-18deg);
+        transform-origin: left center;
+      }
+
+      .hero-inner {
+        width: min(100%, calc(var(--content) + var(--page-pad) * 2));
+        margin: 0 auto;
+        padding: 9.5rem var(--page-pad) 4.25rem;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0 0 1.35rem;
+        color: var(--green);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.66rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 2.2rem;
+        height: 1px;
+        content: "";
+        background: currentColor;
+        box-shadow: 0 0 12px currentColor;
+      }
+
+      .wordmark {
+        max-width: 880px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        color: var(--white);
+        font-family: "Michroma", sans-serif;
+        font-size: clamp(3rem, 8.2vw, 7.7rem);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.065em;
+        text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+      }
+
+      .wordmark-bolt {
+        width: 0.58em;
+        height: 1.28em;
+        margin: -0.02em 0.025em 0 -0.025em;
+        overflow: visible;
+        flex: 0 0 auto;
+        color: var(--green);
+        filter: drop-shadow(0 0 14px rgba(20, 239, 19, 0.45));
+      }
+
+      .hero-tagline {
+        margin: 1.05rem 0 0;
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: clamp(0.66rem, 1.3vw, 0.9rem);
+        font-weight: 500;
+        letter-spacing: clamp(0.14em, 0.8vw, 0.42em);
+        text-transform: uppercase;
+      }
+
+      .hero-copy {
+        max-width: 560px;
+        margin: 2rem 0 0;
+        color: #b9c5bf;
+        font-size: clamp(1rem, 1.6vw, 1.2rem);
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+      }
+
+      .hero-rail {
+        margin-top: clamp(3rem, 9vh, 7rem);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 760px;
+        border-block: 1px solid rgba(242, 243, 242, 0.12);
+      }
+
+      .rail-item {
+        position: relative;
+        padding: 1rem 1.4rem 1rem 0;
+      }
+
+      .rail-item + .rail-item {
+        padding-left: 1.4rem;
+        border-left: 1px solid rgba(242, 243, 242, 0.12);
+      }
+
+      .rail-item span {
+        display: block;
+        margin-bottom: 0.32rem;
+        color: var(--muted);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .rail-item strong {
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: clamp(0.82rem, 1.2vw, 1rem);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .scroll-cue {
+        position: absolute;
+        right: var(--page-pad);
+        bottom: 3.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        color: var(--muted);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+      }
+
+      .scroll-cue::after {
+        width: 1px;
+        height: 4rem;
+        content: "";
+        background: linear-gradient(var(--green), transparent);
+        animation: scroll-line 2s ease-in-out infinite;
+      }
+
+      @keyframes scroll-line {
+        0%,
+        100% {
+          transform: scaleY(0.45);
+          transform-origin: top;
+        }
+        50% {
+          transform: scaleY(1);
+          transform-origin: top;
+        }
+      }
+
+      .ticker {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        border-block: 1px solid rgba(20, 239, 19, 0.25);
+        background: var(--green);
+        color: var(--black);
+        transform: rotate(-1deg) scale(1.02);
+      }
+
+      .ticker-track {
+        width: max-content;
+        padding: 0.85rem 0;
+        display: flex;
+        animation: ticker 26s linear infinite;
+      }
+
+      .ticker-track span {
+        display: flex;
+        align-items: center;
+        gap: 1.15rem;
+        padding-right: 1.15rem;
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .ticker-track svg {
+        width: 0.75rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+
+      @keyframes ticker {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .section {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(6rem, 11vw, 10rem) var(--page-pad);
+      }
+
+      .section-inner {
+        width: min(100%, var(--content));
+        margin: 0 auto;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+        align-items: end;
+        gap: 2rem 5rem;
+      }
+
+      .kicker {
+        margin: 0 0 1rem;
+        color: var(--green);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .section h2 {
+        margin: 0;
+        font-family: "Oxanium", sans-serif;
+        font-size: clamp(2.55rem, 6.4vw, 6rem);
+        font-weight: 600;
+        line-height: 0.93;
+        letter-spacing: -0.045em;
+        text-transform: uppercase;
+      }
+
+      .section-heading > p {
+        margin: 0;
+        color: var(--steel);
+        font-size: clamp(1rem, 1.5vw, 1.16rem);
+        line-height: 1.7;
+      }
+
+      .about {
+        background:
+          radial-gradient(circle at 78% 20%, rgba(20, 239, 19, 0.075), transparent 28rem),
+          var(--black);
+      }
+
+      .outline-year {
+        position: absolute;
+        top: 2rem;
+        right: -0.03em;
+        z-index: 0;
+        color: transparent;
+        font-family: "Oxanium", sans-serif;
+        font-size: clamp(8rem, 24vw, 24rem);
+        font-weight: 700;
+        line-height: 0.8;
+        letter-spacing: -0.09em;
+        opacity: 0.5;
+        -webkit-text-stroke: 1px rgba(242, 243, 242, 0.09);
+        pointer-events: none;
+      }
+
+      .about .section-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .process-grid {
+        margin-top: clamp(3.2rem, 7vw, 6rem);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        border: 1px solid rgba(242, 243, 242, 0.1);
+        background: rgba(242, 243, 242, 0.1);
+      }
+
+      .process-card {
+        --tilt-x: 0deg;
+        --tilt-y: 0deg;
+        position: relative;
+        min-height: 330px;
+        padding: clamp(1.5rem, 3vw, 2.4rem);
+        overflow: hidden;
+        background: rgba(7, 20, 15, 0.98);
+        transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+        transform-style: preserve-3d;
+        transition:
+          transform 160ms ease,
+          background 200ms ease;
+      }
+
+      .process-card::before {
+        position: absolute;
+        inset: 0;
+        content: "";
+        opacity: 0;
+        background: radial-gradient(circle at 50% 110%, rgba(20, 239, 19, 0.18), transparent 55%);
+        transition: opacity 200ms ease;
+      }
+
+      .process-card:hover {
+        background: var(--surface);
+      }
+
+      .process-card:hover::before {
+        opacity: 1;
+      }
+
+      .process-number {
+        color: transparent;
+        font-family: "Oxanium", sans-serif;
+        font-size: 4.8rem;
+        font-weight: 700;
+        line-height: 1;
+        -webkit-text-stroke: 1px rgba(20, 239, 19, 0.45);
+      }
+
+      .process-card h3 {
+        position: relative;
+        margin: 3.5rem 0 0.85rem;
+        font-family: "Michroma", sans-serif;
+        font-size: clamp(1rem, 2vw, 1.45rem);
+        font-weight: 400;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .process-card p {
+        position: relative;
+        max-width: 28ch;
+        margin: 0;
+        color: var(--steel);
+        line-height: 1.65;
+      }
+
+      .process-card svg {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        width: 1.1rem;
+        height: 2.1rem;
+        fill: var(--green);
+        opacity: 0.8;
+      }
+
+      .race-day {
+        padding-top: clamp(4rem, 8vw, 7rem);
+        padding-bottom: clamp(4rem, 8vw, 7rem);
+        background:
+          linear-gradient(110deg, rgba(1, 81, 51, 0.68), rgba(3, 16, 11, 0.96) 52%),
+          var(--surface);
+      }
+
+      .race-day::before,
+      .race-day::after {
+        position: absolute;
+        content: "";
+        pointer-events: none;
+      }
+
+      .race-day::before {
+        inset: 0;
+        opacity: 0.35;
+        background: repeating-linear-gradient(115deg, transparent 0 96px, rgba(20, 239, 19, 0.12) 97px 99px);
+      }
+
+      .race-day::after {
+        top: -25%;
+        right: 10%;
+        width: 2px;
+        height: 150%;
+        background: var(--green);
+        box-shadow:
+          30px 0 60px var(--green),
+          160px 0 100px rgba(20, 239, 19, 0.5);
+        transform: skewX(-25deg);
+      }
+
+      .race-day .section-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 0.75fr 1.4fr;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .date-label {
+        display: block;
+        color: var(--green);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .date-display {
+        margin: 0.8rem 0 0;
+        display: flex;
+        align-items: baseline;
+        gap: clamp(0.8rem, 2vw, 1.6rem);
+        font-family: "Oxanium", sans-serif;
+        font-weight: 600;
+        line-height: 0.84;
+      }
+
+      .date-display strong {
+        font-size: clamp(5rem, 13vw, 11rem);
+        letter-spacing: -0.08em;
+      }
+
+      .date-display span {
+        display: grid;
+        color: var(--white);
+        font-size: clamp(1rem, 2.7vw, 2.4rem);
+        line-height: 1.05;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .race-day-copy {
+        max-width: 650px;
+      }
+
+      .race-day-copy h2 {
+        font-size: clamp(2rem, 4.8vw, 4.5rem);
+      }
+
+      .race-day-copy p {
+        max-width: 52ch;
+        margin: 1.35rem 0 0;
+        color: #b8c8c0;
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        line-height: 1.7;
+      }
+
+      .esper {
+        background:
+          radial-gradient(circle at 20% 55%, rgba(213, 176, 76, 0.09), transparent 26rem),
+          radial-gradient(circle at 82% 48%, rgba(20, 239, 19, 0.08), transparent 24rem),
+          #050a08;
+      }
+
+      .esper-panel {
+        position: relative;
+        min-height: 530px;
+        display: grid;
+        grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+        align-items: center;
+        overflow: hidden;
+        border: 1px solid rgba(242, 243, 242, 0.13);
+        background: linear-gradient(125deg, rgba(14, 32, 24, 0.94), rgba(4, 12, 9, 0.98));
+      }
+
+      .esper-panel::before {
+        position: absolute;
+        top: -20%;
+        left: 42%;
+        width: 1px;
+        height: 145%;
+        content: "";
+        background: linear-gradient(transparent, var(--green), transparent);
+        box-shadow: 0 0 90px 12px rgba(20, 239, 19, 0.12);
+        transform: rotate(22deg);
+      }
+
+      .esper-logo-wrap {
+        position: relative;
+        min-height: 100%;
+        padding: clamp(2.25rem, 6vw, 5rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          linear-gradient(rgba(242, 243, 242, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(242, 243, 242, 0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+      }
+
+      .esper-logo-wrap::after {
+        position: absolute;
+        inset: 12%;
+        border: 1px solid rgba(242, 243, 242, 0.07);
+        content: "";
+      }
+
+      .esper-logo-wrap img {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 460px);
+        height: auto;
+        object-fit: contain;
+      }
+
+      .esper-copy {
+        position: relative;
+        z-index: 1;
+        padding: clamp(2.25rem, 6vw, 5.5rem);
+      }
+
+      .esper-copy .kicker {
+        color: var(--gold);
+      }
+
+      .esper-copy h2 {
+        max-width: 8ch;
+      }
+
+      .esper-copy p {
+        max-width: 52ch;
+        margin: 1.6rem 0 0;
+        color: var(--steel);
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        line-height: 1.75;
+      }
+
+      .esper-copy a {
+        margin-top: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-decoration-color: var(--gold);
+        text-underline-offset: 0.45rem;
+        text-transform: uppercase;
+      }
+
+      .esper-copy a:hover {
+        color: var(--gold);
+      }
+
+      .contact {
+        padding-top: clamp(6rem, 10vw, 9rem);
+        padding-bottom: clamp(6rem, 10vw, 9rem);
+        text-align: center;
+        background:
+          linear-gradient(rgba(20, 239, 19, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(20, 239, 19, 0.05) 1px, transparent 1px),
+          var(--black);
+        background-size: 64px 64px;
+      }
+
+      .contact .kicker {
+        margin-bottom: 1.3rem;
+      }
+
+      .contact h2 {
+        max-width: 900px;
+        margin-inline: auto;
+        font-size: clamp(2.8rem, 8vw, 7.6rem);
+      }
+
+      .contact h2 span {
+        color: var(--green);
+      }
+
+      .contact p {
+        max-width: 520px;
+        margin: 1.7rem auto 0;
+        color: var(--steel);
+        font-size: 1.06rem;
+        line-height: 1.7;
+      }
+
+      .contact-number {
+        margin: 2.5rem auto 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: clamp(1.35rem, 3vw, 2.3rem);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+      }
+
+      .contact-number span {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        background: var(--green);
+        color: var(--black);
+        clip-path: polygon(0 0, 78% 0, 100% 22%, 100% 100%, 22% 100%, 0 78%);
+      }
+
+      .contact-number svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      .contact-number:hover {
+        color: var(--green);
+      }
+
+      .contact-note {
+        margin-top: 0.8rem !important;
+        color: var(--muted) !important;
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.7rem !important;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .contact-note a,
+      .footer-meta a {
+        color: inherit;
+        text-decoration-color: rgba(20, 239, 19, 0.45);
+        text-underline-offset: 0.3rem;
+        transition: color 160ms ease;
+      }
+
+      .contact-note a:hover,
+      .footer-meta a:hover {
+        color: var(--green);
+      }
+
+      .site-footer {
+        border-top: 1px solid rgba(242, 243, 242, 0.1);
+        background: #030806;
+      }
+
+      .footer-inner {
+        width: min(100%, calc(var(--content) + var(--page-pad) * 2));
+        margin: 0 auto;
+        padding: 2.2rem var(--page-pad);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+
+      .footer-brand img {
+        width: 44px;
+        height: 52px;
+        object-fit: contain;
+      }
+
+      .footer-brand p,
+      .footer-meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.68rem;
+        line-height: 1.55;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .footer-brand strong {
+        display: block;
+        color: var(--steel);
+        font-family: "Oxanium", sans-serif;
+        letter-spacing: 0.12em;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .process-card.reveal:nth-child(2) {
+        transition-delay: 90ms;
+      }
+
+      .process-card.reveal:nth-child(3) {
+        transition-delay: 180ms;
+      }
+
+      .process-card.reveal {
+        transform: translateY(24px) perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      }
+
+      .process-card.reveal.is-visible {
+        transform: translateY(0) perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--green);
+        outline-offset: 4px;
+      }
+
+      @media (max-width: 920px) {
+        .nav-links a:not(.nav-cta) {
+          display: none;
+        }
+
+        .hero::before {
+          background-position: 58% center;
+          opacity: 0.78;
+        }
+
+        .hero::after {
+          background:
+            radial-gradient(circle 20rem at var(--pointer-x) var(--pointer-y), rgba(20, 239, 19, 0.12), transparent 70%),
+            linear-gradient(90deg, rgba(2, 9, 8, 0.96), rgba(2, 9, 8, 0.45) 72%),
+            linear-gradient(0deg, var(--black) 0%, rgba(2, 9, 8, 0.1) 48%, rgba(2, 9, 8, 0.5) 100%);
+        }
+
+        .section-heading {
+          grid-template-columns: 1fr;
+        }
+
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .process-card {
+          min-height: 260px;
+        }
+
+        .process-card h3 {
+          margin-top: 2rem;
+        }
+
+        .race-day .section-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .date-display strong {
+          font-size: clamp(6rem, 24vw, 10rem);
+        }
+
+        .esper-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .esper-logo-wrap {
+          min-height: 310px;
+        }
+
+        .esper-panel::before {
+          left: 65%;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          height: 70px;
+        }
+
+        .brand-copy span {
+          display: none;
+        }
+
+        .nav-cta {
+          min-height: 42px;
+          padding-inline: 0.9rem;
+          font-size: 0.65rem;
+        }
+
+        .hero {
+          min-height: 820px;
+        }
+
+        .hero::before {
+          background-position: 63% center;
+          transform: scale(1.03);
+        }
+
+        .hero::after {
+          background:
+            linear-gradient(90deg, rgba(2, 9, 8, 0.94), rgba(2, 9, 8, 0.28)),
+            linear-gradient(0deg, var(--black) 0%, rgba(2, 9, 8, 0.08) 50%, rgba(2, 9, 8, 0.58) 100%);
+        }
+
+        .hero-inner {
+          padding-top: 8rem;
+          padding-bottom: 3rem;
+        }
+
+        .wordmark {
+          font-size: clamp(2.25rem, 12.3vw, 4.2rem);
+        }
+
+        .hero-tagline {
+          max-width: 32ch;
+          line-height: 1.7;
+        }
+
+        .hero-copy {
+          max-width: 31ch;
+          font-size: 0.98rem;
+        }
+
+        .hero-actions {
+          align-items: stretch;
+          flex-direction: column;
+          max-width: 320px;
+        }
+
+        .hero-rail {
+          grid-template-columns: 1fr;
+          max-width: 320px;
+          margin-top: 3rem;
+        }
+
+        .rail-item,
+        .rail-item + .rail-item {
+          padding: 0.8rem 0;
+          border-left: 0;
+        }
+
+        .rail-item + .rail-item {
+          border-top: 1px solid rgba(242, 243, 242, 0.12);
+        }
+
+        .scroll-cue {
+          display: none;
+        }
+
+        .ticker-track {
+          padding-block: 0.7rem;
+        }
+
+        .section h2 {
+          font-size: clamp(2.25rem, 13vw, 4rem);
+        }
+
+        .process-card {
+          min-height: 250px;
+        }
+
+        .date-display {
+          align-items: center;
+        }
+
+        .date-display strong {
+          font-size: 6.8rem;
+        }
+
+        .date-display span {
+          font-size: 1.15rem;
+        }
+
+        .race-day-copy h2 {
+          font-size: 2.25rem;
+        }
+
+        .esper-logo-wrap {
+          min-height: 230px;
+        }
+
+        .esper-logo-wrap img {
+          width: min(100%, 350px);
+        }
+
+        .esper-copy h2 {
+          font-size: 2.6rem;
+        }
+
+        .contact h2 {
+          font-size: clamp(2.6rem, 15vw, 5rem);
+        }
+
+        .contact-number {
+          gap: 0.7rem;
+          letter-spacing: 0.04em;
+        }
+
+        .contact-number span {
+          width: 42px;
+          height: 42px;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+
+        .process-card {
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="SSDSSC home">
+          <img src="/ssdssc/logo.png" alt="" width="42" height="48" />
+          <span class="brand-copy">
+            <strong>SSDS</strong>
+            <span>D. S. Senanayake College</span>
+          </span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#showdown">The showdown</a>
+          <a href="#esper">Esper stage</a>
+          <a href="https://www.instagram.com/igniterc25/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="nav-cta" href="#contact">Contact us</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" data-hero aria-labelledby="igniterc-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-speed-lines" data-parallax aria-hidden="true"></div>
+
+        <div class="hero-inner">
+          <p class="eyebrow">Science Society of D. S. Senanayake College presents</p>
+
+          <h1 class="wordmark" id="igniterc-title" aria-label="Ignite RC">
+            <span>IGN</span>
+            <svg class="wordmark-bolt" viewBox="0 0 42 100" aria-hidden="true">
+              <path fill="currentColor" d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path>
+            </svg>
+            <span>TERC</span>
+          </h1>
+
+          <p class="hero-tagline">The ultimate build-your-own RC showdown</p>
+          <p class="hero-copy">
+            Design it. Build it. Then put your engineering to the test against teams
+            from across the Western Province.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button" href="#showdown">
+              Enter the grid
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m5 7 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+              </svg>
+            </a>
+            <a class="button button--ghost" href="tel:+94707670676">Talk to the team</a>
+          </div>
+
+          <div class="hero-rail" aria-label="Event details">
+            <div class="rail-item">
+              <span>Race day</span>
+              <strong>{eventDate}</strong>
+            </div>
+            <div class="rail-item">
+              <span>Grid</span>
+              <strong>Western Province</strong>
+            </div>
+            <div class="rail-item">
+              <span>Challenge</span>
+              <strong>Design · Build · Race</strong>
+            </div>
+          </div>
+        </div>
+
+        <span class="scroll-cue" aria-hidden="true">Scroll to ignite</span>
+      </section>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          {[...Array(2)].map(() => (
+            <>
+              <span>
+                Design it
+                <svg viewBox="0 0 42 100"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              </span>
+              <span>
+                Build it
+                <svg viewBox="0 0 42 100"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              </span>
+              <span>
+                Race it
+                <svg viewBox="0 0 42 100"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              </span>
+              <span>
+                IgniteRC 2026
+                <svg viewBox="0 0 42 100"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              </span>
+            </>
+          ))}
+        </div>
+      </div>
+
+      <section class="section about" id="showdown" aria-labelledby="showdown-title">
+        <span class="outline-year" aria-hidden="true">2026</span>
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <div>
+              <p class="kicker">01 / The challenge</p>
+              <h2 id="showdown-title">Your school.<br />Your machine.</h2>
+            </div>
+            <p>
+              IgniteRC challenges school teams to design, build, and race their own
+              remote-controlled vehicles—putting creativity, engineering skills, and
+              innovation to work in the most fun way possible.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-card reveal" data-tilt>
+              <span class="process-number">01</span>
+              <svg viewBox="0 0 42 100" aria-hidden="true"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              <h3>Design</h3>
+              <p>Plan a machine where every choice has a job to do on the track.</p>
+            </article>
+
+            <article class="process-card reveal" data-tilt>
+              <span class="process-number">02</span>
+              <svg viewBox="0 0 42 100" aria-hidden="true"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              <h3>Build</h3>
+              <p>Turn components, creativity, and teamwork into an RC car that is yours.</p>
+            </article>
+
+            <article class="process-card reveal" data-tilt>
+              <span class="process-number">03</span>
+              <svg viewBox="0 0 42 100" aria-hidden="true"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
+              <h3>Race</h3>
+              <p>Bring it to the grid and put your school-built machine to the test.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section race-day" aria-labelledby="race-day-title">
+        <div class="section-inner">
+          <div class="reveal">
+            <span class="date-label">Race day / fixed</span>
+            <p class="date-display" aria-label="11 July 2026">
+              <strong>11</strong>
+              <span><b>July</b><b>2026</b></span>
+            </p>
+          </div>
+          <div class="race-day-copy reveal">
+            <p class="kicker">One province. One grid.</p>
+            <h2 id="race-day-title">Bring the science.<br />Bring the speed.</h2>
+            <p>
+              Schools from around Sri Lanka's Western Province meet for a day of
+            home-built RC engineering, close racing, and the kind of friendly rivalry
+              where speed, precision, and teamwork all count.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section esper" id="esper" aria-labelledby="esper-title">
+        <div class="section-inner">
+          <div class="esper-panel reveal">
+            <div class="esper-logo-wrap">
+              <img
+                src="/esper/images/nskh2pvc8h3ex4zhjyptc6eau.png"
+                alt="Esper Awards"
+                width="500"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="esper-copy">
+              <p class="kicker">02 / Beyond the finish line</p>
+              <h2 id="esper-title">Race here.<br />Get recognised.</h2>
+              <p>
+                IgniteRC winners will receive their awards on the Esper Awards stage—
+                the flagship science day and awards ceremony of the Science Society of
+                D. S. Senanayake College.
+              </p>
+              <a href="/esper">
+                Discover Esper Awards
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="section-inner reveal">
+          <p class="kicker">Questions from the pit?</p>
+          <h2 id="contact-title">Let's get your school<br /><span>on the grid.</span></h2>
+          <p>
+            Need the event details? Call Minuka, President of SSDS, and talk directly
+            to the team behind IgniteRC.
+          </p>
+          <a class="contact-number" href="tel:+94707670676" aria-label={`Call Minuka on ${contactNumber}`}>
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.2 2.8 10 7.7 7.9 9.4c1.4 2.8 3.7 5.1 6.5 6.5l1.7-2.1 4.9 2.8-.7 3.2c-.2.8-.9 1.4-1.8 1.4C9.9 20.7 3.3 14.1 2.8 5.5c0-.9.5-1.6 1.4-1.8l3-.9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            {contactNumber}
+          </a>
+          <p class="contact-note">Minuka · President, Science Society of D. S.</p>
+          <p class="contact-note">
+            <a href="https://www.instagram.com/igniterc25/" target="_blank" rel="noreferrer">
+              Follow @igniterc25 on Instagram ↗
+            </a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="/ssdssc/logo.png" alt="SSDS logo" width="44" height="52" loading="lazy" />
+          <p>
+            <strong>Science Society of D. S.</strong>
+            D. S. Senanayake College · Colombo 07
+          </p>
+        </div>
+        <p class="footer-meta">
+          <a href="https://www.instagram.com/igniterc25/" target="_blank" rel="noreferrer">@igniterc25</a>
+          · Built by students, for students
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const header = document.querySelector('[data-header]');
+      const hero = document.querySelector('[data-hero]');
+      const parallax = document.querySelector('[data-parallax]');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const updateHeader = () => {
+        header?.classList.toggle('is-scrolled', window.scrollY > 28);
+      };
+
+      updateHeader();
+      window.addEventListener('scroll', updateHeader, { passive: true });
+
+      if (hero && !reducedMotion) {
+        hero.addEventListener('pointermove', (event) => {
+          const bounds = hero.getBoundingClientRect();
+          const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+          const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+          hero.style.setProperty('--pointer-x', `${x}%`);
+          hero.style.setProperty('--pointer-y', `${y}%`);
+        });
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (parallax && window.scrollY < window.innerHeight) {
+              parallax.style.translate = `${window.scrollY * -0.045}px ${window.scrollY * 0.08}px`;
+            }
+          },
+          { passive: true },
+        );
+      }
+
+      const reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.14 },
+        );
+        reveals.forEach((element) => observer.observe(element));
+      } else {
+        reveals.forEach((element) => element.classList.add('is-visible'));
+      }
+
+      if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+        document.querySelectorAll('[data-tilt]').forEach((card) => {
+          card.addEventListener('pointermove', (event) => {
+            const bounds = card.getBoundingClientRect();
+            const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+            const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+            card.style.setProperty('--tilt-x', `${y * -4}deg`);
+            card.style.setProperty('--tilt-y', `${x * 5}deg`);
+          });
+
+          card.addEventListener('pointerleave', () => {
+            card.style.setProperty('--tilt-x', '0deg');
+            card.style.setProperty('--tilt-y', '0deg');
+          });
+        });
+      }
+    </script>
+
+    <Analytics />
+  </body>
+</html>

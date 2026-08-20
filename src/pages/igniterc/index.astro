@@ -3,8 +3,12 @@ import Analytics from '@vercel/analytics/astro';
 
 export const prerender = true;
 
-const eventDate = '11 July 2026';
 const contactNumber = '070 767 0676';
+const facebookAlbum = 'https://www.facebook.com/media/set/?vanity=frametoque&set=a.122116658805271134';
+const galleryPhotos = Array.from({ length: 50 }, (_, index) => ({
+  src: `/igniterc/gallery/event-${String(index + 1).padStart(2, '0')}.webp`,
+  alt: `IgniteRC 2026 event photograph ${index + 1}`,
+}));
 ---
 
 <!doctype html>
@@ -16,14 +20,14 @@ const contactNumber = '070 767 0676';
     <meta name="robots" content="index, follow" />
     <meta
       name="description"
-      content="IgniteRC is the ultimate build-your-own inter-school RC car showdown by the Science Society of D. S. Senanayake College. Race day: 11 July 2026."
+      content="IgniteRC 2026, the build-your-own inter-school RC car showdown by the Science Society of D. S. Senanayake College, concluded on 11 July 2026. Relive the event in our gallery."
     />
     <link rel="canonical" href="https://ssdssc.com/igniterc" />
 
     <meta property="og:title" content="IgniteRC 2026 | Design. Build. Race." />
     <meta
       property="og:description"
-      content="Schools across Sri Lanka's Western Province. One build-your-own RC showdown."
+      content="The 2026 showdown has concluded. Relive the builds, the racing, and the people behind IgniteRC."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ssdssc.com/igniterc" />
@@ -35,7 +39,7 @@ const contactNumber = '070 767 0676';
     <meta name="twitter:title" content="IgniteRC 2026" />
     <meta
       name="twitter:description"
-      content="The ultimate build-your-own RC showdown by SSDS."
+      content="IgniteRC 2026 has concluded. Relive the event through the official gallery."
     />
     <meta
       name="twitter:image"
@@ -355,6 +359,33 @@ const contactNumber = '070 767 0676';
         content: "";
         background: currentColor;
         box-shadow: 0 0 12px currentColor;
+      }
+
+      .hero-status {
+        width: fit-content;
+        margin: 0 0 1.25rem;
+        padding: 0.55rem 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        border: 1px solid rgba(20, 239, 19, 0.35);
+        background: rgba(2, 9, 8, 0.72);
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+      }
+
+      .hero-status::before {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        content: "";
+        background: var(--green);
+        box-shadow: 0 0 14px rgba(20, 239, 19, 0.85);
       }
 
       .wordmark {
@@ -760,6 +791,196 @@ const contactNumber = '070 767 0676';
         line-height: 1.7;
       }
 
+      .gallery {
+        background:
+          radial-gradient(circle at 12% 14%, rgba(20, 239, 19, 0.08), transparent 26rem),
+          #040b08;
+      }
+
+      .gallery-heading {
+        align-items: end;
+      }
+
+      .gallery-heading > div:last-child {
+        display: grid;
+        justify-items: start;
+        gap: 1.25rem;
+      }
+
+      .gallery-heading p {
+        margin: 0;
+        color: var(--steel);
+        font-size: clamp(1rem, 1.5vw, 1.16rem);
+        line-height: 1.7;
+      }
+
+      .gallery-heading a,
+      .gallery-more {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        min-height: 46px;
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba(242, 243, 242, 0.2);
+        background: transparent;
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: border-color 160ms ease, color 160ms ease;
+      }
+
+      .gallery-heading a:hover,
+      .gallery-heading a:focus-visible,
+      .gallery-more:hover,
+      .gallery-more:focus-visible {
+        border-color: var(--green);
+        color: var(--green);
+      }
+
+      .gallery-grid {
+        margin-top: clamp(3rem, 6vw, 5.5rem);
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: clamp(170px, 18vw, 250px);
+        grid-auto-flow: dense;
+        gap: 0.75rem;
+      }
+
+      .gallery-item {
+        position: relative;
+        min-width: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid rgba(242, 243, 242, 0.1);
+        background: var(--surface);
+        color: inherit;
+        cursor: zoom-in;
+      }
+
+      .gallery-item:nth-child(11n + 1),
+      .gallery-item:nth-child(11n + 7) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      .gallery-item[hidden] {
+        display: none;
+      }
+
+      .gallery-item::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(0deg, rgba(2, 9, 8, 0.5), transparent 48%);
+        opacity: 0;
+        transition: opacity 200ms ease;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1), filter 250ms ease;
+      }
+
+      .gallery-item:hover::after,
+      .gallery-item:focus-visible::after {
+        opacity: 1;
+      }
+
+      .gallery-item:hover img,
+      .gallery-item:focus-visible img {
+        filter: saturate(1.08) contrast(1.03);
+        transform: scale(1.035);
+      }
+
+      .gallery-item span {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.7rem;
+        z-index: 1;
+        color: var(--white);
+        font-family: "Oxanium", sans-serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        opacity: 0;
+        text-transform: uppercase;
+        transition: opacity 180ms ease;
+      }
+
+      .gallery-item:hover span,
+      .gallery-item:focus-visible span {
+        opacity: 1;
+      }
+
+      .gallery-actions {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .gallery-dialog {
+        width: min(1100px, calc(100% - 2rem));
+        max-height: calc(100svh - 2rem);
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid rgba(242, 243, 242, 0.18);
+        background: #020706;
+        color: var(--white);
+      }
+
+      .gallery-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.88);
+        backdrop-filter: blur(8px);
+      }
+
+      .gallery-dialog img {
+        width: 100%;
+        max-height: calc(100svh - 2rem);
+        display: block;
+        object-fit: contain;
+      }
+
+      .gallery-dialog-controls {
+        position: absolute;
+        inset: 1rem 1rem auto;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .gallery-dialog-controls div {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .gallery-dialog button {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(242, 243, 242, 0.28);
+        background: rgba(2, 9, 8, 0.78);
+        color: var(--white);
+        font: 600 1rem "Oxanium", sans-serif;
+        cursor: pointer;
+        pointer-events: auto;
+        backdrop-filter: blur(8px);
+      }
+
+      .gallery-dialog button:hover,
+      .gallery-dialog button:focus-visible {
+        border-color: var(--green);
+        color: var(--green);
+      }
+
       .esper {
         background:
           radial-gradient(circle at 20% 55%, rgba(213, 176, 76, 0.09), transparent 26rem),
@@ -1076,6 +1297,11 @@ const contactNumber = '070 767 0676';
         .esper-panel::before {
           left: 65%;
         }
+
+        .gallery-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-auto-rows: clamp(180px, 28vw, 260px);
+        }
       }
 
       @media (max-width: 640px) {
@@ -1177,6 +1403,18 @@ const contactNumber = '070 767 0676';
           font-size: 2.25rem;
         }
 
+        .gallery-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-auto-rows: clamp(150px, 48vw, 230px);
+          gap: 0.5rem;
+        }
+
+        .gallery-item:nth-child(11n + 1),
+        .gallery-item:nth-child(11n + 7) {
+          grid-column: span 2;
+          grid-row: span 1;
+        }
+
         .esper-logo-wrap {
           min-height: 230px;
         }
@@ -1247,8 +1485,8 @@ const contactNumber = '070 767 0676';
 
         <div class="nav-links">
           <a href="#showdown">The showdown</a>
+          <a href="#gallery">Gallery</a>
           <a href="#esper">Esper stage</a>
-          <a href="/igniterc/register">Register</a>
           <a href="https://www.instagram.com/igniterc25/" target="_blank" rel="noreferrer">Instagram</a>
           <a class="nav-cta" href="#contact">Contact us</a>
         </div>
@@ -1262,6 +1500,7 @@ const contactNumber = '070 767 0676';
 
         <div class="hero-inner">
           <p class="eyebrow">Science Society of D. S. Senanayake College presents</p>
+          <p class="hero-status">2026 edition concluded</p>
 
           <h1 class="wordmark" id="igniterc-title" aria-label="Ignite RC">
             <span>IGN</span>
@@ -1273,13 +1512,13 @@ const contactNumber = '070 767 0676';
 
           <p class="hero-tagline">The ultimate build-your-own RC showdown</p>
           <p class="hero-copy">
-            Design it. Build it. Then put your engineering to the test against teams
-            from across the Western Province.
+            The builds were bold, the racing was close, and the 2026 grid delivered.
+            Relive the showdown through the official event gallery.
           </p>
 
           <div class="hero-actions">
-            <a class="button" href="/igniterc/register">
-              Register now
+            <a class="button" href="#gallery">
+              View the gallery
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="m7 4 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"></path>
               </svg>
@@ -1289,8 +1528,8 @@ const contactNumber = '070 767 0676';
 
           <div class="hero-rail" aria-label="Event details">
             <div class="rail-item">
-              <span>Race day</span>
-              <strong>{eventDate}</strong>
+              <span>Status</span>
+              <strong>2026 event concluded</strong>
             </div>
             <div class="rail-item">
               <span>Grid</span>
@@ -1323,7 +1562,7 @@ const contactNumber = '070 767 0676';
                 <svg viewBox="0 0 42 100"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
               </span>
               <span>
-                IgniteRC 2026
+                2026 concluded
                 <svg viewBox="0 0 42 100"><path d="M25 0 4 54h16L13 100l25-59H23L25 0Z"></path></svg>
               </span>
             </>
@@ -1374,23 +1613,84 @@ const contactNumber = '070 767 0676';
       <section class="section race-day" aria-labelledby="race-day-title">
         <div class="section-inner">
           <div class="reveal">
-            <span class="date-label">Race day / fixed</span>
+            <span class="date-label">2026 edition / concluded</span>
             <p class="date-display" aria-label="11 July 2026">
               <strong>11</strong>
               <span><b>July</b><b>2026</b></span>
             </p>
           </div>
           <div class="race-day-copy reveal">
-            <p class="kicker">One province. One grid.</p>
-            <h2 id="race-day-title">Bring the science.<br />Bring the speed.</h2>
+            <p class="kicker">One province. One unforgettable grid.</p>
+            <h2 id="race-day-title">The race is run.<br />The spark remains.</h2>
             <p>
-              Schools from around Sri Lanka's Western Province meet for a day of
-            home-built RC engineering, close racing, and the kind of friendly rivalry
-              where speed, precision, and teamwork all count.
+              Schools from around Sri Lanka's Western Province came together for a day
+              of home-built RC engineering, close racing, and friendly rivalry where
+              speed, precision, and teamwork all counted.
             </p>
           </div>
         </div>
       </section>
+
+      <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
+        <div class="section-inner">
+          <div class="section-heading gallery-heading reveal">
+            <div>
+              <p class="kicker">02 / Event gallery</p>
+              <h2 id="gallery-title">Built. Raced.<br />Remembered.</h2>
+            </div>
+            <div>
+              <p>
+                Moments from IgniteRC 2026—from the machines on the track to the teams,
+                organisers, and supporters who brought the showdown to life. Captured
+                by official media partner FrameToque.
+              </p>
+              <a href={facebookAlbum} target="_blank" rel="noreferrer">
+                View all 125 on Facebook <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="gallery-grid" data-gallery-grid>
+            {galleryPhotos.map((photo, index) => (
+              <button
+                class="gallery-item reveal"
+                type="button"
+                data-gallery-item
+                data-gallery-index={index}
+                hidden={index >= 12}
+                aria-label={`Open event photograph ${index + 1} of ${galleryPhotos.length}`}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  width="843"
+                  height="562"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span aria-hidden="true">View / {String(index + 1).padStart(2, '0')}</span>
+              </button>
+            ))}
+          </div>
+
+          <div class="gallery-actions reveal">
+            <button class="gallery-more" type="button" data-gallery-more>
+              Show all 50 photographs
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <dialog class="gallery-dialog" data-gallery-dialog aria-label="Event photograph viewer">
+        <img data-gallery-dialog-image alt="" width="843" height="562" />
+        <div class="gallery-dialog-controls">
+          <div>
+            <button type="button" data-gallery-prev aria-label="Previous photograph">←</button>
+            <button type="button" data-gallery-next aria-label="Next photograph">→</button>
+          </div>
+          <button type="button" data-gallery-close aria-label="Close photograph viewer">×</button>
+        </div>
+      </dialog>
 
       <section class="section esper" id="esper" aria-labelledby="esper-title">
         <div class="section-inner">
@@ -1405,7 +1705,7 @@ const contactNumber = '070 767 0676';
               />
             </div>
             <div class="esper-copy">
-              <p class="kicker">02 / Beyond the finish line</p>
+              <p class="kicker">03 / Beyond the finish line</p>
               <h2 id="esper-title">Race here.<br />Get recognised.</h2>
               <p>
                 IgniteRC winners will receive their awards on the Esper Awards stage—
@@ -1423,11 +1723,11 @@ const contactNumber = '070 767 0676';
 
       <section class="section contact" id="contact" aria-labelledby="contact-title">
         <div class="section-inner reveal">
-          <p class="kicker">Questions from the pit?</p>
-          <h2 id="contact-title">Let's get your school<br /><span>on the grid.</span></h2>
+          <p class="kicker">Questions after the finish?</p>
+          <h2 id="contact-title">Stay connected for<br /><span>what comes next.</span></h2>
           <p>
-            Need the event details? Call Minuka, President of SSDS, and talk directly
-            to the team behind IgniteRC.
+            Want to know more about the concluded 2026 event? Call Minuka, President
+            of SSDS, and talk directly to the team behind IgniteRC.
           </p>
           <a class="contact-number" href="tel:+94707670676" aria-label={`Call Minuka on ${contactNumber}`}>
             <span>
@@ -1530,6 +1830,58 @@ const contactNumber = '070 767 0676';
           });
         });
       }
+
+      const galleryItems = Array.from(document.querySelectorAll('[data-gallery-item]'));
+      const galleryMore = document.querySelector('[data-gallery-more]');
+      const galleryDialog = document.querySelector('[data-gallery-dialog]');
+      const galleryDialogImage = document.querySelector('[data-gallery-dialog-image]');
+      let activeGalleryIndex = 0;
+
+      galleryMore?.addEventListener('click', () => {
+        galleryItems.forEach((item) => {
+          item.hidden = false;
+          item.classList.add('is-visible');
+        });
+        galleryMore.closest('.gallery-actions')?.remove();
+      });
+
+      const showGalleryPhoto = (index) => {
+        const normalizedIndex = (index + galleryItems.length) % galleryItems.length;
+        const image = galleryItems[normalizedIndex]?.querySelector('img');
+        if (!galleryDialog || !galleryDialogImage || !image) return;
+
+        activeGalleryIndex = normalizedIndex;
+        galleryDialogImage.src = image.src;
+        galleryDialogImage.alt = image.alt;
+      };
+
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          showGalleryPhoto(index);
+          galleryDialog?.showModal();
+        });
+      });
+
+      document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => {
+        showGalleryPhoto(activeGalleryIndex - 1);
+      });
+
+      document.querySelector('[data-gallery-next]')?.addEventListener('click', () => {
+        showGalleryPhoto(activeGalleryIndex + 1);
+      });
+
+      document.querySelector('[data-gallery-close]')?.addEventListener('click', () => {
+        galleryDialog?.close();
+      });
+
+      galleryDialog?.addEventListener('click', (event) => {
+        if (event.target === galleryDialog) galleryDialog.close();
+      });
+
+      galleryDialog?.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') showGalleryPhoto(activeGalleryIndex - 1);
+        if (event.key === 'ArrowRight') showGalleryPhoto(activeGalleryIndex + 1);
+      });
     </script>
 
     <Analytics />
